@@ -3,7 +3,10 @@
         "browser": true,
         "es6": true
     },
-    "extends": "standard",
+    "plugins": "security",
+    "extends": ["standard",
+	    "plugin:security/recommended"
+    ],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
