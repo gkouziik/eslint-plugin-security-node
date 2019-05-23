@@ -3,7 +3,7 @@
         "browser": true,
         "es6": true
     },
-    "plugins": "security",
+    "plugins": ["security"],
     "extends": ["standard",
 	    "plugin:security/recommended"
     ],
