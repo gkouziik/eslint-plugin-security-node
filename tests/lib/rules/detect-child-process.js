@@ -22,8 +22,8 @@ const ERROR_MSG_EXECFILE_SPAWN = 'Found child_process.execFile or child_process.
 var ruleTester = new RuleTester()
 var validExec = 'child_process.exec("ls", function (err, data) {})'
 var invalidExec = 'var path = "user input"; child_process.exec("ls -l" + path, function (err, data) {})'
-var validExecFile = 'child_process.execFile("node",["--version"],{cwd:"..."},(error, stdout, stderr) => {if (error) {throw error}})'
-var invalidExecFile = 'child_process.execFile("node", ["--version"],{shell:true,cwd:"...""},(error, stdout, stderr) => {if (error) {throw error}})'
+var validExecFile = 'child_process.execFile("node",["--version"],{cwd:"..."},function(error,stdout,stderr){if(error){throw error}})'
+var invalidExecFile = 'child_process.execFile("node",["--version"],{shell:true},function(error,stdout,stderr){if(error){throw error}})'
 var validSpawn = 'child_process.spawn("ls-la",["--version"],{cwd:"..."})'
 var invalidSpawn = 'child_process.spawn("ls-la",["--version"],{shell:true})'
 
