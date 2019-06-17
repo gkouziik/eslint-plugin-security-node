@@ -7,12 +7,11 @@
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
-// var rule = require("../../../lib/rules/detect-child-process"),
+const rule = require('../../../lib/rules/detect-child-process')
+const RuleTester = require('eslint').RuleTester
 
-//     RuleTester = require("eslint").RuleTester;
-
-import rule from '../../../lib/rules/detect-child-process'
-import { RuleTester } from 'eslint'
+// import rule from '../../../lib/rules/detect-child-process'
+// import { RuleTester } from 'eslint'
 
 // ------------------------------------------------------------------------------
 // Tests
