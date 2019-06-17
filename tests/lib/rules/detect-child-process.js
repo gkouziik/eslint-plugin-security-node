@@ -2,36 +2,82 @@
  * @fileoverview detect instances of child_process.exec with or without string concatenation and shell:true option in chil_process functions
  * @author gkouziik
  */
-"use strict";
+'use strict'
 
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 // Requirements
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
+// var rule = require("../../../lib/rules/detect-child-process"),
 
-var rule = require("../../../lib/rules/detect-child-process"),
+//     RuleTester = require("eslint").RuleTester;
 
-    RuleTester = require("eslint").RuleTester;
+import rule from '../../../lib/rules/detect-child-process'
+import { RuleTester } from 'eslint'
 
-
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 // Tests
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-ruleTester.run("detect-child-process", rule, {
+const ERROR_MSG_EXEC = 'Found child_process.exec() with non Literal first argument'
+const ERROR_MSG_EXECFILE_SPAWN = 'Found child_process.execFile or child_process.spawn() with option shell:true'
+var ruleTester = new RuleTester()
+var validExec = 'child_process.exec("ls", function (err, data) {})'
+var invalidExec = 'var path = "user input"; child_process.exec("ls -l" + path, function (err, data) {})'
+var validExecFile = 'child_process.execFile("node",["--version"],{cwd:"..."},(error, stdout, stderr) => {if (error) {throw error}})'
+var invalidExecFile = 'child_process.execFile("node", ["--version"],{shell:true,cwd:"...""},(error, stdout, stderr) => {if (error) {throw error}})'
+var validSpawn = 'child_process.spawn("ls-la",["--version"],{cwd:"..."})'
+var invalidSpawn = 'child_process.spawn("ls-la",["--version"],{shell:true})'
 
-    valid: [
+ruleTester.run('detect-child-process', rule, {
 
-        // give me some code that won't trigger a warning
-    ],
+  valid: [
+    {
+      code: validExec
+    }
+  ],
 
-    invalid: [
-        {
-            code: "",
-            errors: [{
-                message: "Fill me in.",
-                type: "Me too"
-            }]
-        }
-    ]
-});
+  invalid: [
+    {
+      code: invalidExec,
+      errors: [{
+        message: ERROR_MSG_EXEC
+      }]
+    }
+  ]
+})
+
+ruleTester.run('detect-child-process', rule, {
+
+  valid: [
+    {
+      code: validExecFile
+    }
+  ],
+
+  invalid: [
+    {
+      code: invalidExecFile,
+      errors: [{
+        message: ERROR_MSG_EXECFILE_SPAWN
+      }]
+    }
+  ]
+})
+
+ruleTester.run('detect-child-process', rule, {
+
+  valid: [
+    {
+      code: validSpawn
+    }
+  ],
+
+  invalid: [
+    {
+      code: invalidSpawn,
+      errors: [{
+        message: ERROR_MSG_EXECFILE_SPAWN
+      }]
+    }
+  ]
+})
