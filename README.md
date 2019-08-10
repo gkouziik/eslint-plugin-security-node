@@ -1,6 +1,9 @@
 # eslint-plugin-security-plugin
 
-Create a security plugin for educational reasons
+ESLint plugin for security
+ESLint rules for Node Security
+This plugin will help to identify potential threads,and prevent attacks
+
 
 ## Installation
 
