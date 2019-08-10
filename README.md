@@ -19,14 +19,14 @@ $ npm i eslint --save-dev
 
 ## Tests
 
-```
+```sh
 $ npm test
 ```
 
 ## Rules
 
 ```
-<b>non literal regural expr </b>
+### non literal regural expr
 ```
 
 
