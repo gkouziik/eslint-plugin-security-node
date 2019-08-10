@@ -1,7 +1,7 @@
 # eslint-plugin-security-plugin
 
-ESLint plugin for security
-ESLint rules for Node Security
+ESLint plugin for security <br/>
+ESLint rules for Node Security <br/>
 This plugin will help to identify potential threads,and prevent attacks
 
 
@@ -12,6 +12,17 @@ You'll first need to install [ESLint](http://eslint.org):
 ```
 $ npm i eslint --save-dev
 ```
+
+## Usage
+
+## Developer guide
+
+## Tests
+...
+$ npm test
+...
+
+## Rules
 
 
 
