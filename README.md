@@ -18,9 +18,11 @@ $ npm i eslint --save-dev
 ## Developer guide
 
 ## Tests
-...
+
+```
+
 $ npm test
-...
+```
 
 ## Rules
 
