@@ -25,7 +25,7 @@ $ npm test
 
 ## Rules
 
-### `detect non literal regular expr`
+#### `detect non literal regular expr`
 
 
 
