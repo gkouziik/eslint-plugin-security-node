@@ -1,7 +1,10 @@
-# detect instances of child_process.exec with or without string concatenation and shell:true option in chil_process functions (detect-child-process)
+# Command Injection in Node.js
 
-Please describe the origin of the rule here.
+Before we dive into the rule details, we have to clarify 'command Injection'
 
+An injection vulnerability manifests when application code sends untrusted user input to an interpreter as part of a command or query!
+
+(detect instances of child_process.exec with or without string concatenation and shell:true option in chil_process functions (detect-child-process))
 
 ## Rule Details
 
