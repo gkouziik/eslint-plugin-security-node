@@ -26,6 +26,29 @@ child_process.exec(
 To exploit the injection vulnerability in the preceding code,an attacker can append **; rm -rf /** ,for instance, to the file_path input.This allows an attacker to break out of the gzip command context and execute malicious command that delets all files on the server.As part of the user input,an attacker also chain multiple commands by using characters such as **;,&,|,||,$(),<,>,and >>**.
 The attack manifests because,under the hood,the exec method spawns a new bin/sh process and passes the command argument for execution to this system shell.This is equivalent to opening a Bash interpreter for an attacker to run any commands with the same privileges as the vulnerable application!
 
+### Preventing Command Injection
+Now that you know the potential of an injection attack to cause severe damage,let's go over methods to prevent it.
+
+###Do not use exec with literal first argument or String concatenation
+As you saw in the example above,exec spawns a new shell,so if the **command** argument is a user input (literal argument or argument with string concat may denote user input) ,that may cause serious damage.
+
+### Use execFile OR spawn instead of exec
+When possible, use the child_process module's **execFile** or **spawn** methods instead of exec.Unlike exec,the spawn and execFile method signatures force developers to separate the command and its arguments.
+Check the example below,
+
+```javascript
+var file_path = req.body.file_path;
+
+//Execute gzip command
+child_process.execFile(
+    'gzip',
+    [file_path],
+    function (err,data) {
+        console.log(data);
+    });
+```
+Any malicious commands chained to file_path user input end up in execFile method's second argument of type array.Any malicious commands in user input are simply ignored or cause a syntax error if they are not relevant to the target command,thus failing the command injection attempts!
+
 
 
 (detect instances of child_process.exec with or without string concatenation and shell:true option in chil_process functions (detect-child-process))
