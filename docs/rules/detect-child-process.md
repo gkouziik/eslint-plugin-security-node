@@ -29,8 +29,8 @@ The attack manifests because,under the hood,the exec method spawns a new bin/sh 
 ### Preventing Command Injection
 Now that you know the potential of an injection attack to cause severe damage,let's go over methods to prevent it.
 
-###Do not use exec with literal first argument or String concatenation
-As you saw in the example above,exec spawns a new shell,so if the **command** argument is a user input (literal argument or argument with string concat may denote user input) ,that may cause serious damage.
+### Do not use exec with  String concatenation
+As you saw in the example above,exec spawns a new shell,so if the **command** argument is a user input (string concat may denote user input) ,that may cause serious damage.
 
 ### Use execFile OR spawn instead of exec
 When possible, use the child_process module's **execFile** or **spawn** methods instead of exec.Unlike exec,the spawn and execFile method signatures force developers to separate the command and its arguments.
@@ -49,38 +49,54 @@ child_process.execFile(
 ```
 Any malicious commands chained to file_path user input end up in execFile method's second argument of type array.Any malicious commands in user input are simply ignored or cause a syntax error if they are not relevant to the target command,thus failing the command injection attempts!
 
+### Do not use execFile or spawn with option:true
+let's dive into **spawn and execFile** methods!
+```javscript
+child_process.spawn(command[,args][,options])
+child_process.execFile(file[,args][,options][,callback])
+```
 
+They both have several options that user can manipulate.One of them is the option 
+**shell:true**. If the shell option is true,then the command runs into a new shell and becomes as dangerous as exec method can be.
 
-(detect instances of child_process.exec with or without string concatenation and shell:true option in chil_process functions (detect-child-process))
+### Input Validation
+Although execFile or spawn are safer alternatives to exec,these methods cannot completely prevent command injection.The related scenarios include developers using these methods to invoke a custom script that processes user input,or to execute OS commands(such as find,awk, or sed) that allows passing options to enable file read/write.
+Just like other injection attacks,command injection is primarly possible due to indufficient input validation.To protect against it,verify that user-controlled command arguments and command options are valid.
+
+### Using a Whitelist approach for input Validation
+When writing the validation logic,use a whitelist approach; that is,define what is permitted and reject any input that doesn't fit this definition.Avoid writing this logic in an opposite manner(blacklist approach), or, in other words,by comparing input against a set of known unsafe characters.Attackers can often find a way to circumvent such filters by being creative with input construction!
 
 ## Rule Details
 
-This rule aims to...
-
 Examples of **incorrect** code for this rule:
 
-```js
+```javascript
+//exec invalid
+var path = "user input"; 
+child_process.exec("ls -l" + path, function (err, data) {});
 
-// fill me in
+//execFile invalid
+child_process.execFile("node",["--version"],{shell:true},function(error,stdout,stderr){if(error){throw error}});
+
+//invalid spawn
+child_process.spawn("ls-la",["--version"],{shell:true});
 
 ```
 
 Examples of **correct** code for this rule:
 
-```js
+```javascript
+//exec valid
+child_process.exec("ls", function (err, data) {});
 
-// fill me in
+//execFile valid
+child_process.execFile("node",["--version"],{cwd:"..."},function(error,stdout,stderr){if(error){throw error}});
 
+//spawn valid
+child_process.spawn("ls-la",["--version"],{cwd:"..."})
 ```
 
-### Options
+### Further Reading
+[link 1](https://www.oreilly.com/library/view/securing-node-applications/9781491982426)
+[link 2](https://hackernoon.com/nodejs-security-issue-javascript-node-example-tutorial-vulnerabilities-hack-line-url-command-injection-412011924d1b)
 
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
-
-## Further Reading
-
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
