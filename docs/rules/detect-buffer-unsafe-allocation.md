@@ -4,9 +4,11 @@ Before we dive into allocUnsafe 's evil "face" we need to clarify this method.
 ```javascript
 Buffer.allocUnsafe(size);
 ```
-size <integer> The desired length of the new Buffer.
+**size** (integer) -> The desired length of the new Buffer.
+
 Allocates a new Buffer of size bytes.A zero-length Buffer is created if size is 0.
 (tip: pay attention to the lines below and the example)
+
 The underlying memory for Buffer instances created in this way is not initialized.The contents of the newly created Buffer are unknown and may contain sensitive data.
 example,
 
