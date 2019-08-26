@@ -29,11 +29,11 @@ When JS expanded to the server with Node, the browser sandbox was removed, and t
 
 In versions of Node.js prior to 6.0.0, Buffer instances were created using the Buffer constructor function, which allocates the returned Buffer differently based on what arguments are provided:
 
-..* Passing a number as the first argument to Buffer() (e.g. new Buffer(10)) allocates a new Buffer object of the specified size. Prior to Node.js 8.0.0, the memory allocated for such Buffer instances is not initialized and can contain sensitive data. Such Buffer instances must be subsequently initialized by using either buf.fill(0) or by writing to the entire Buffer. While this behavior is intentional to improve performance, development experience has demonstrated that a more explicit distinction is required between creating a fast-but-uninitialized Buffer versus creating a slower-but-safer Buffer. Since Node.js 8.0.0, Buffer(num) and new Buffer(num) return a Buffer with initialized memory.
+* Passing a number as the first argument to Buffer() (e.g. new Buffer(10)) allocates a new Buffer object of the specified size. Prior to Node.js 8.0.0, the memory allocated for such Buffer instances is not initialized and can contain sensitive data. Such Buffer instances must be subsequently initialized by using either buf.fill(0) or by writing to the entire Buffer. While this behavior is intentional to improve performance, development experience has demonstrated that a more explicit distinction is required between creating a fast-but-uninitialized Buffer versus creating a slower-but-safer Buffer. Since Node.js 8.0.0, Buffer(num) and new Buffer(num) return a Buffer with initialized memory.
 
-..* Passing a string, array, or Buffer as the first argument copies the passed object's data into the Buffer.
+* Passing a string, array, or Buffer as the first argument copies the passed object's data into the Buffer.
 
-..* Passing an ArrayBuffer or a SharedArrayBuffer returns a Buffer that shares allocated memory with the given array buffer.
+* Passing an ArrayBuffer or a SharedArrayBuffer returns a Buffer that shares allocated memory with the given array buffer.
 
 Because the behavior of new Buffer() is different depending on the type of the first argument, security and reliability issues can be inadvertently introduced into applications when argument validation or Buffer initialization is not performed.
 
@@ -41,14 +41,14 @@ For example, if an attacker can cause an application to receive a number where a
 
 To make the creation of Buffer instances more reliable and less error-prone, the various forms of the new Buffer() constructor have been deprecated and replaced by separate Buffer.from(), Buffer.alloc(), and Buffer.allocUnsafe() methods.
 
-..* Buffer.alloc(size[, fill[, encoding]]) returns a new initialized Buffer of the specified size. This method is slower than Buffer.allocUnsafe(size) but guarantees that newly created Buffer instances never contain old data that is potentially sensitive. A TypeError will be thrown if size is not a number.
+* Buffer.alloc(size[, fill[, encoding]]) returns a new initialized Buffer of the specified size. This method is slower than Buffer.allocUnsafe(size) but guarantees that newly created Buffer instances never contain old data that is potentially sensitive. A TypeError will be thrown if size is not a number.
 
-..* Buffer.allocUnsafe(size) and Buffer.allocUnsafeSlow(size) each return a new uninitialized Buffer of the specified size. Because the Buffer is uninitialized, the allocated segment of memory might contain old data that is potentially sensitive.
+* Buffer.allocUnsafe(size) and Buffer.allocUnsafeSlow(size) each return a new uninitialized Buffer of the specified size. Because the Buffer is uninitialized, the allocated segment of memory might contain old data that is potentially sensitive.
 
-*** What makes Buffer.allocUnsafe() "unsafe"?
+### What makes Buffer.allocUnsafe() "unsafe"?
 When calling Buffer.allocUnsafe(), the segment of allocated memory is uninitialized (it is not zeroed-out). While this design makes the allocation of memory quite fast, the allocated segment of memory might contain old data that is potentially sensitive. Using a Buffer created by Buffer.allocUnsafe() without completely overwriting the memory can allow this old data to be leaked when the Buffer memory is read
 
-*** Where's the problem if i can always use Buffer.alloc() instead of Buffer.allocUnsafe() ?
+### Where's the problem if i can always use Buffer.alloc() instead of Buffer.allocUnsafe() ?
 Allocation is a synchronous operation and we know that single threaded Node.js doesn't really feel good about synchronous stuff. Unsafe allocation is much faster than safe, because the buffer santarization step takes time. Safe allocation is, well, safe, but there is a performance trade off.
 
 
