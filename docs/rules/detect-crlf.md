@@ -47,34 +47,8 @@ An attacker may craft a malicious request that may deliberately fail, which the 
  * Do not allow user input into logs
  * Encode to proper context,or sanitize user input
 
-## Rule Details
-
-This rule aims to...
-
-Examples of **incorrect** code for this rule:
-
-```js
-
-// fill me in
-
-```
-
-Examples of **correct** code for this rule:
-
-```js
-
-// fill me in
-
-```
-
-### Options
-
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
 
 ## Further Reading
 
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
+[link 1](http://nodegoat.herokuapp.com/tutorial/a1)
+[link 2](https://www.owasp.org/index.php/Log_Injection)
