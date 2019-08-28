@@ -1,4 +1,4 @@
-# detect dangerous redirects (detect-dangerous-redirects)
+# detect dangerous redirects
 
 ### What are Unsafe Redirects?
 Unsafe or unvalidated redirects are important security considerations for any web developer!Express provides native support for redirects,making them easy to implement and use.However,Express leves the work of perfoming input validation to the developer.
@@ -22,7 +22,7 @@ However, if the server-side redirect logic does not validate data entering the u
 
 This is just one example of how attackers can take advantage of unsafe redirect logic.
 
-###An Example of an Unsafe Redirect
+### An Example of an Unsafe Redirect
 In the following code, you'll see that /login accepts unvalidated data from the url parameter and passes it directly into the Express res.redirect() method. As a result, Express will redirect the user to whatever URL is entered or supplied so long as the user is authenticated.
 
 ```javascript
@@ -51,7 +51,7 @@ app.listen(port, function() {
 });
 ```
 
-###How to prevent it?
+### How to prevent it?
 
 * Simply avoid using redirects and forwards.
 
