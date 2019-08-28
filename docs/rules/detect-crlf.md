@@ -39,7 +39,7 @@ An attacker may craft a malicious request that may deliberately fail, which the 
  Error:alex moldovan failed $1,000,000 transaction
  ```
 
- ### Log injection Escalation
+### Log injection Escalation
  An attacker may craft malicious input in hope of an escalated attack where the target isn't the logs themselves,but rather the actual logging system.For example,if an application has a back-office webb app that manages viewing and tracking the logs,then an attacker may send an XSS payload into the log,which may not result in log forging on the log itself,but when viewed by a system administrator on the lg viewing web app then it may compromise it and result in XSS injection that if the logs app is vulnerable!
 
  ### How DO I Prevent it?

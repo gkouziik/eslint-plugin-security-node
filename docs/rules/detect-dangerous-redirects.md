@@ -1,36 +1,66 @@
 # detect dangerous redirects (detect-dangerous-redirects)
 
-Please describe the origin of the rule here.
+### What are Unsafe Redirects?
+Unsafe or unvalidated redirects are important security considerations for any web developer!Express provides native support for redirects,making them easy to implement and use.However,Express leves the work of perfoming input validation to the developer.
 
+Here's the definition according to OWASP.org's "Unvalidated Redirects and Forwards" cheat sheet:
 
-## Rule Details
+* Unvalidated redirects and forwards are possible when a web application accepts untrusted input that could cause the web application to redirect the request to a URL contained within untrusted input.
 
-This rule aims to...
+Redirects are commonly used in login and authentication processes,so users can be redirected back to the page they were on before logging in.Other scenarios exist,but vary based on business need or application type.
 
-Examples of **incorrect** code for this rule:
+### Why are they bad?
+Redirects that do not validate user input can enable attackers to launch phising scams,steal user credentials,and perform other malicious actions.
 
-```js
+If an attacker discovers that you are not validating external, user-supplied input, they may exploit this vulnerability by posting specially-crafted links on forums, social media, and other public places to get users to click it.
 
-// fill me in
+At face value, these URLs may look legitimate to the user - since all of them will contain your organization's hostname
 
+* https://example.com/login?url=http://examp1e.com/bad/things
+
+However, if the server-side redirect logic does not validate data entering the url parameter, your users may end up on a site that looks exactly like yours (examp1e.com), but ultimately serves the needs of criminal hackers!
+
+This is just one example of how attackers can take advantage of unsafe redirect logic.
+
+###An Example of an Unsafe Redirect
+In the following code, you'll see that /login accepts unvalidated data from the url parameter and passes it directly into the Express res.redirect() method. As a result, Express will redirect the user to whatever URL is entered or supplied so long as the user is authenticated.
+
+```javascript
+var express = require('express');
+var port = process.env.PORT || 3000;
+var app = express();
+
+app.get('/login', function (req, res, next) {
+
+	if(req.session.isAuthenticated()) {
+
+		res.redirect(req.query.url);
+	}
+}); 
+
+app.get('/account', function (req, res, next) {
+    res.send('Account page');
+});
+
+app.get('/profile', function (req, res, next) {
+    res.send('Profile page');
+});
+
+app.listen(port, function() {
+    console.log('Server listening on port ' + port);
+});
 ```
 
-Examples of **correct** code for this rule:
+###How to prevent it?
 
-```js
+* Simply avoid using redirects and forwards.
 
-// fill me in
+* If used, don’t involve user parameters in calculating the destination. This can usually be done.
 
-```
+* If destination parameters can’t be avoided, ensure that the supplied value is valid, and authorized for the user. 
+It is recommended that any such destination parameters be a mapping value, rather than the actual URL or portion of the URL, and that server side code translate this mapping to the target URL.
 
-### Options
-
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
 
 ## Further Reading
-
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
+[link 1](http://nodegoat.herokuapp.com/tutorial/a10)
+[link 2](https://blog.hailstone.io/how-to-prevent-unsafe-redirects-in-node-js/)
