@@ -9,6 +9,7 @@ In Software security the **Sources[*]** are to be considered starting points whe
 There are two types of input sources
 * Direct
 * Indirect
+
 So we will analyze the various types of Direct/Indirect input and how malicious Javascript code can cause damage by exploiting incorrect programming techniques.
 
 In software security the **Sinks[*]** are meant to be the points in the flow where data depending from sources is used in a potentially dangerous way resulting in loss of Confidentiality,Integrity or Availability.
@@ -24,7 +25,9 @@ document.URL.substring(name, document.URL.length)); <- SINK
 </script>
 ```
 **Source**: document.URL
+
 **Sink**: document.write()
+
 **Result**: document.write("<script>alert(docuemnt.cookie)</script>");
 
 The exploit will take place when visiting the following URL:
@@ -34,6 +37,14 @@ The exploit will take place when visiting the following URL:
 * Glossary:  
 Sources: Sources are all the DOM Properties that can be influenced by an attacker. 
 Sinks: Sinks are all the DOM Properties, JavaScript functions and other Client-side entities that can lead to or influence Client-side code execution. 
+
+###Table of dangerous Javascript functions/properties for HTML manipulation
+ Here below we report a table with the principal sinks that allow HTML manipulation which likely will result JavaScript execution.
+
+Function Name | Browser | Example
+------------- | ------- | -------
+document.write | All | document.write(“<b>” + userControlledVal + “</b>”);
+document.writeln | All | document.writeln("<b>" + userControlledVal + "</b>");
 
 
 
