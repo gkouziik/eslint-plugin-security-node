@@ -1,6 +1,40 @@
 # Detect html injection (detect-html-injection)
+### Introduction to HTML Maipulation Function
+When a method or operation allows HTML manipulation if it is possible to control,even partially,an argument,then it is possible to manipulate,to some extent the HTML and consequently gain control of the user interface or execute Javascript using classic Cross Site Scripting attacks.
 
-Please describe the origin of the rule here.
+Data flow starts from Sources(input data that could be tainted) and ends to Sinks (functions potentially dangerous).
+
+In Software security the **Sources[*]** are to be considered starting points where untrusted input data is taken by an application.
+
+There are two types of input sources
+* Direct
+* Indirect
+So we will analyze the various types of Direct/Indirect input and how malicious Javascript code can cause damage by exploiting incorrect programming techniques.
+
+In software security the **Sinks[*]** are meant to be the points in the flow where data depending from sources is used in a potentially dangerous way resulting in loss of Confidentiality,Integrity or Availability.
+
+This means that a function is a Sink if its behavior is generally safe but vould be dangerous with a tainted input data.
+
+To understand the difference between Source and tainted Source take a look to the following code:
+```javascript
+<script>
+var name = document.URL.indexof("name=") + 5; <- TAINTED SOURCE
+document.wirte("Welcome " + 
+document.URL.substring(name, document.URL.length)); <- SINK
+</script>
+```
+**Source**: document.URL
+**Sink**: document.write()
+**Result**: document.write("<script>alert(docuemnt.cookie)</script>");
+
+The exploit will take place when visiting the following URL:
+
+   http://example.tld/page.html#name=<script>alert(document.cookie)</script>
+
+* Glossary:  
+Sources: Sources are all the DOM Properties that can be influenced by an attacker. 
+Sinks: Sinks are all the DOM Properties, JavaScript functions and other Client-side entities that can lead to or influence Client-side code execution. 
+
 
 
 ## Rule Details
