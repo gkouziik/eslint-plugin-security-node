@@ -45,6 +45,12 @@ Function Name | Browser | Example
 ------------- | ------- | -------
 document.write | All | document.write(“<b>” + userControlledVal + “</b>”);
 document.writeln | All | document.writeln("<b>" + userControlledVal + "</b>");
+anyElement.innerHTML | All | divElem.innerHTML = “Hello ” + userControlledVal
+anyElement.outerHTML | All | divElem.outerHTML =  "<div>Hello " + userControlledVal
++ "</div>"
+anyElement.insertAdjacentHTML | All | divElem.insertAdjacentHTML("","<b>"+ userControlledVal + "</b>");)
+
+
 
 
 
