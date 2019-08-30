@@ -8,34 +8,28 @@ Developers and system administrators need to work together to ensure that the en
 ### Attack Mechanics
 If the server is misconfigured to leak internal implementation details via cookie names or HTTP response headers, then attacker can use this information towards building site's risk profile and finding vulnerabilities
 
+### What about express-session?
 
-## Rule Details
+#### What is Express session used for?
+You can **use sessions** to comunicate data to middleware that's executed later,or ro retrieve it later on, on subsequent requests. Where is the session data stored? It depends on how you set up the express-session module. All solutions store the session id in a cookie, and keep the data server-side.
 
-This rule aims to...
+#### How does express session work?
+Until the cookie expires, every time you make a request, your browser will send the cookies back to the server. A module like express-session will provide you with a nice API to work with sessions (letting you get & set data to the session), but under the hood, it will save and retrieve this data using a cookie.
 
-Examples of **incorrect** code for this rule:
+#### "Security" options of express-session
+* **cookie.httpOnly**: Specifies the **boolean** value for the **HttpOnly Set-Cookie** attribute.When truthy,the HttpOnly attribute is set,otherwise it is not. **By default**, the HttpOnly attribute **is set**.
 
-```js
+**Note**: Be careful when setting to true,as compliant clients will not allow client-side Javascript to see the cookie in document.cookie!
 
-// fill me in
+So if this attribute is set, it actually prevents cookies from being accessed by browser JS scripts.
 
-```
+* **cookie.secure**: Specifies the **boolean** value for the **Secure Set-Cookie** attribute.When truthy ,the Secure attribute is set,otherwise it is not.**By default**,the Secure attribute is **not** set.
 
-Examples of **correct** code for this rule:
+**Note**: Be careful when setting this to true,as compliant clients will not send the cookie back to the server in the future if the browser does not have an **HTTPS** connection.
 
-```js
+So if this attribute is set,Cookies can only be configured over secure HTTPS connections.
 
-// fill me in
-
-```
-
-### Options
-
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
 
 ## Further Reading
-
+[link 1](https://www.npmjs.com/package/express-session)
+[link 2](http://nodegoat.herokuapp.com/tutorial/a5)
