@@ -1,36 +1,47 @@
 # Detects window.open() attack (detect-window-open-attack)
+People using 
+```javascript 
+target ='_blank' 
+``` 
+links usually have no idea about this curious fact:
 
-Please describe the origin of the rule here.
+**The page we're linking to gains partial access to the linking page via the window.opener object.**
 
+The newly opened tab can the change the window.opener.location to some phising page.Users trust the page that is already opened,they won't get suspicious.
 
+**Example attack scenario**
+* Create a fake "viral" page with cute cat pictures,jokes or whatever,get it shared on Facebook(which is known for opening links via _blank).
+* Create a "phising" website at 'https://fakewebsite/facebook.com/page.html';
+which redirects the Facebook tab to your phising page,asking the user to re-enter his Facebook password.
+
+### How to Fix
+Add this to your outgoing links.
+```javascript
+rel="opener"
+```
+Update:FF doesn not suport "noopener" so add this.
+```javascript
+rel="noopener noreferer"
+```
+
+Remeber,that every time you open a new window via window.open(); you're also vulnerable to this,so always reset the "opener" property
+```javascript
+var newWnd = window.open();
+newWnd.opener = null;
+```
 ## Rule Details
 
-This rule aims to...
 
 Examples of **incorrect** code for this rule:
 
 ```js
-
-// fill me in
-
+var newWnd = window.open();
+// ......
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
-
-// fill me in
-
+var newWnd = window.open();
+newWnd.opener = null;
 ```
-
-### Options
-
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
-
-## Further Reading
-
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
