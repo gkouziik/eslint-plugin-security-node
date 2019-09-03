@@ -5,33 +5,18 @@ Malicious user input could find its way to a parameter that is used to require t
 
 
 ## Rule Details
-
-This rule aims to...
+This rule is looking for require() with non literal arguments!
 
 Examples of **incorrect** code for this rule:
 
 ```js
-
-// fill me in
-
+// insecure, as helperPath variable may have been modified by user input
+const uploadHelpers = require(helperPath);
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
-
-// fill me in
-
+// secure
+const uploadHelpers = require('./helpers/upload');
 ```
-
-### Options
-
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
-
-## Further Reading
-
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
