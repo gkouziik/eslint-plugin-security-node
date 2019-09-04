@@ -1,36 +1,24 @@
 # Detect the absence of name option in express session (detect-absence-of-name-option-in-exrpress-session)
 
-Please describe the origin of the rule here.
-
-
-## Rule Details
-
-This rule aims to...
-
-Examples of **incorrect** code for this rule:
-
-```js
-
-// fill me in
-
-```
-
-Examples of **correct** code for this rule:
+### Anonymize the sessionID Used
+The first step for an attacker targeting a system is reconnaissance. The
+attacker researches the environment and narrows possible attack vectors to
+optimize the attack. As the defender, we want them to waste as much time
+as possible, so keeping the intruder guessing is a good move.
+The default implementation of session in express and connect uses connect.sid as
+the sessionID token in the cookie. It’s not hard to understand what technolo-
+gies are in use based on that. To make it harder for possible attackers to gain
+information about the application’s underlying systems, we need to use a more generic name for the session ID:
 
 ```js
-
-// fill me in
-
+app.use(express.session({
+name: 'id', // <-- a generic name for the session id
+secret: 'this is a nice secret',
+resave: false,
+saveUninitialized: true
+}));
 ```
+With this configuration option, we can stop declaring to the world our session-
+handling mechanism and force the attacker to spend more time using various
+different attacks that don’t impact our setup.
 
-### Options
-
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
-
-## Further Reading
-
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
