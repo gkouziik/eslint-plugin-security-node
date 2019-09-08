@@ -2,36 +2,31 @@
  * @fileoverview Non literal require calls may cause an attack
  * @author Gkouziik
  */
-"use strict";
+'use strict'
 
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
+var rule = require('../../../lib/rules/detect-non-literal-require-calls')
 
-var rule = require("../../../lib/rules/detect-non-literal-require-calls"),
+var RuleTester = require('eslint').RuleTester
 
-    RuleTester = require("eslint").RuleTester;
+const ERROR_MSG = 'Found require with non-literal argument'
+const valid = 'var req = require("a")'
+const invalid = 'var req = require(a)'
 
+var ruleTester = new RuleTester()
+ruleTester.run('detect-non-literal-require-calls', rule, {
 
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
+  valid: [
+    {
+      code: valid
+    }
+  ],
 
-var ruleTester = new RuleTester();
-ruleTester.run("detect-non-literal-require-calls", rule, {
-
-    valid: [
-
-        // give me some code that won't trigger a warning
-    ],
-
-    invalid: [
-        {
-            code: "",
-            errors: [{
-                message: "Fill me in.",
-                type: "Me too"
-            }]
-        }
-    ]
-});
+  invalid: [
+    {
+      code: invalid,
+      errors: [{
+        message: ERROR_MSG
+      }]
+    }
+  ]
+})
