@@ -2,36 +2,30 @@
  * @fileoverview Detect the absence of name option in express session
  * @author Gkouziik
  */
-"use strict";
+'use strict'
 
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
+// eslint-disable-next-line one-var
+var rule = require('../../../lib/rules/detect-absence-of-name-option-in-exrpress-session')
+var RuleTester = require('eslint').RuleTester
 
-var rule = require("../../../lib/rules/detect-absence-of-name-option-in-exrpress-session"),
+const ERROR_MSG = 'detect absence of option:name in express-session'
+const validProperty = 'var session = require("express-session"); app.use(session({secret: "keyboard cat",name: "something",resave: false,saveUninitialized: true,cookie: { secure: true }}));'
+const invalidProperty = 'var session = require("express-session"); app.use(session({secret: "keyboard cat",resave: false,saveUninitialized: true,cookie: { secure: true }}));'
+var ruleTester = new RuleTester()
+ruleTester.run('detect-absence-of-name-option-in-exrpress-session', rule, {
 
-    RuleTester = require("eslint").RuleTester;
+  valid: [
+    {
+      code: validProperty
+    }
+  ],
 
-
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
-
-var ruleTester = new RuleTester();
-ruleTester.run("detect-absence-of-name-option-in-exrpress-session", rule, {
-
-    valid: [
-
-        // give me some code that won't trigger a warning
-    ],
-
-    invalid: [
-        {
-            code: "",
-            errors: [{
-                message: "Fill me in.",
-                type: "Me too"
-            }]
-        }
-    ]
-});
+  invalid: [
+    {
+      code: invalidProperty,
+      errors: [{
+        message: ERROR_MSG
+      }]
+    }
+  ]
+})
