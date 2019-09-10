@@ -29,3 +29,4 @@ ruleTester.run('detect-absence-of-name-option-in-exrpress-session', rule, {
     }
   ]
 })
+
