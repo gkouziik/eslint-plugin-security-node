@@ -1,37 +1,45 @@
 /**
- * @fileoverview detect log forging attack 
+ * @fileoverview detect log forging attack
  * @author Gkouziik
  */
-"use strict";
+'use strict'
 
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
+var rule = require('../../../lib/rules/detect-crlf')
+var RuleTester = require('eslint').RuleTester
 
-var rule = require("../../../lib/rules/detect-crlf"),
+const ERROR_MSG = 'Detect console.log() with non Literal argument'
+const validConsoleLog = 'console.log("Hello");'
+const invalidConsoleLog = 'console.log("Hello" + foo);'
+const invalidConsoleLogSecond = 'console.log("Hello",foo);'
+const invalidConsoleLogThird = 'console.log(foo);'
 
-    RuleTester = require("eslint").RuleTester;
+var ruleTester = new RuleTester()
+ruleTester.run('detect-crlf', rule, {
 
+  valid: [
+    {
+      code: validConsoleLog
+    }
+  ],
 
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
-
-var ruleTester = new RuleTester();
-ruleTester.run("detect-crlf", rule, {
-
-    valid: [
-
-        // give me some code that won't trigger a warning
-    ],
-
-    invalid: [
-        {
-            code: "",
-            errors: [{
-                message: "Fill me in.",
-                type: "Me too"
-            }]
-        }
-    ]
-});
+  invalid: [
+    {
+      code: invalidConsoleLog,
+      errors: [{
+        message: ERROR_MSG
+      }]
+    },
+    {
+      code: invalidConsoleLogSecond,
+      errors: [{
+        message: ERROR_MSG
+      }]
+    },
+    {
+      code: invalidConsoleLogThird,
+      errors: [{
+        message: ERROR_MSG
+      }]
+    }
+  ]
+})
