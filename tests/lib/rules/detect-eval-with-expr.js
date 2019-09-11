@@ -2,36 +2,35 @@
  * @fileoverview detect eval with string concatenation
  * @author Gkouziik
  */
-"use strict";
+'use strict'
 
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
+var rule = require('../../../lib/rules/detect-eval-with-expr')
+var RuleTester = require('eslint').RuleTester
+var ruleTester = new RuleTester()
+const ERROR_MSG = 'detect eval() with non Literal argument'
+const valid = 'eval("foo");'
+const invalid = 'eval("foo." + property);'
+const invalidSecond = 'eval(foo);'
+ruleTester.run('detect-eval-with-expr', rule, {
 
-var rule = require("../../../lib/rules/detect-eval-with-expr"),
+  valid: [
+    {
+      code: valid
+    }
+  ],
 
-    RuleTester = require("eslint").RuleTester;
-
-
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
-
-var ruleTester = new RuleTester();
-ruleTester.run("detect-eval-with-expr", rule, {
-
-    valid: [
-
-        // give me some code that won't trigger a warning
-    ],
-
-    invalid: [
-        {
-            code: "",
-            errors: [{
-                message: "Fill me in.",
-                type: "Me too"
-            }]
-        }
-    ]
-});
+  invalid: [
+    {
+      code: invalid,
+      errors: [{
+        message: ERROR_MSG
+      }]
+    },
+    {
+      code: invalidSecond,
+      errors: [{
+        message: ERROR_MSG
+      }]
+    }
+  ]
+})
