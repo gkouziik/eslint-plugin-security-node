@@ -2,36 +2,31 @@
  * @fileoverview Buffer.allocUnsafe(size) is not safe and should not be used
  * @author Gkouziik
  */
-"use strict";
 
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
+'use strict'
 
-var rule = require("../../../lib/rules/detect-buffer-unsafe-allocation"),
+var rule = require('../../../lib/rules/detect-buffer-unsafe-allocation')
 
-    RuleTester = require("eslint").RuleTester;
+var RuleTester = require('eslint').RuleTester
+var ruleTester = new RuleTester()
+const ERROR_MSG = 'detect Buffer.allocUnsafe()'
+const valid = 'Buffer.alloc(5)'
+const invalid = 'Buffer.allocUnsafe(5)'
 
+ruleTester.run('detect-buffer-unsafe-allocation', rule, {
 
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
+  valid: [
+    {
+      code: valid
+    }
+  ],
 
-var ruleTester = new RuleTester();
-ruleTester.run("detect-buffer-unsafe-allocation", rule, {
-
-    valid: [
-
-        // give me some code that won't trigger a warning
-    ],
-
-    invalid: [
-        {
-            code: "",
-            errors: [{
-                message: "Fill me in.",
-                type: "Me too"
-            }]
-        }
-    ]
-});
+  invalid: [
+    {
+      code: invalid,
+      errors: [{
+        message: ERROR_MSG
+      }]
+    }
+  ]
+})
