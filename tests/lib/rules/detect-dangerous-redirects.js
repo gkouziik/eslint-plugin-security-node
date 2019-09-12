@@ -2,36 +2,35 @@
  * @fileoverview detect dangerous redirects
  * @author Gkouziik
  */
-"use strict";
+'use strict'
 
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
+var rule = require('../../../lib/rules/detect-dangerous-redirects')
+var RuleTester = require('eslint').RuleTester
+const ERROR_MSG = 'detect res.redirect() with non literal argument'
+const valid = 'res.redirect("foo");'
+const invalid = 'res.redirect(foo + "foo");'
+const invalidSecond = 'res.redirect(foo);'
+var ruleTester = new RuleTester()
+ruleTester.run('detect-dangerous-redirects', rule, {
 
-var rule = require("../../../lib/rules/detect-dangerous-redirects"),
+  valid: [
+    {
+      code: valid
+    }
+  ],
 
-    RuleTester = require("eslint").RuleTester;
-
-
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
-
-var ruleTester = new RuleTester();
-ruleTester.run("detect-dangerous-redirects", rule, {
-
-    valid: [
-
-        // give me some code that won't trigger a warning
-    ],
-
-    invalid: [
-        {
-            code: "",
-            errors: [{
-                message: "Fill me in.",
-                type: "Me too"
-            }]
-        }
-    ]
-});
+  invalid: [
+    {
+      code: invalid,
+      errors: [{
+        message: ERROR_MSG
+      }]
+    },
+    {
+      code: invalidSecond,
+      errors: [{
+        message: ERROR_MSG
+      }]
+    }
+  ]
+})
