@@ -1,5 +1,5 @@
 # Detect html injection (detect-html-injection)
-### Introduction to HTML Maipulation Function
+### Introduction to HTML Manipulation Function
 When a method or operation allows HTML manipulation if it is possible to control,even partially,an argument,then it is possible to manipulate,to some extent the HTML and consequently gain control of the user interface or execute Javascript using classic Cross Site Scripting attacks.
 
 Data flow starts from Sources(input data that could be tainted) and ends to Sinks (functions potentially dangerous).
