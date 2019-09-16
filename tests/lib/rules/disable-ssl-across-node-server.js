@@ -2,36 +2,26 @@
  * @fileoverview process.env.NODE_TLS_REJECT_UNAUTHORIZED=&#39;0&#39; disables SSL across node server!
  * @author Gkouziik
  */
-"use strict";
+'use strict';
 
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
+var rule = require('../../../lib/rules/disable-ssl-across-node-server');
+var RuleTester = require('eslint').RuleTester
+const ERROR_MSG = 'detect process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"'
+const invalid = 'process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";'
 
-var rule = require("../../../lib/rules/disable-ssl-across-node-server"),
+var ruleTester = new RuleTester()
+ruleTester.run('disable-ssl-across-node-server', rule, {
 
-    RuleTester = require("eslint").RuleTester;
+  valid: [
 
+  ],
 
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
-
-var ruleTester = new RuleTester();
-ruleTester.run("disable-ssl-across-node-server", rule, {
-
-    valid: [
-
-        // give me some code that won't trigger a warning
-    ],
-
-    invalid: [
-        {
-            code: "",
-            errors: [{
-                message: "Fill me in.",
-                type: "Me too"
-            }]
-        }
-    ]
-});
+  invalid: [
+    {
+      code: invalid,
+      errors: [{
+        message: ERROR_MSG
+      }]
+    }
+  ]
+})
