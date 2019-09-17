@@ -2,36 +2,31 @@
  * @fileoverview detect vm.runInThisContext() method in nodes vm
  * @author Gkouziik
  */
-"use strict";
+'use strict'
 
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
+var rule = require('../../../lib/rules/detect-runinthiscontext-method-in-nodes-vm')
 
-var rule = require("../../../lib/rules/detect-runinthiscontext-method-in-nodes-vm"),
+var RuleTester = require('eslint').RuleTester
+const ERROR_MSG = 'detect runInThisContext() with non Literal argument'
+const valid = 'vm.runInThisContext("foo");'
+const invalid = 'vm.runInThisContext(foo);'
 
-    RuleTester = require("eslint").RuleTester;
+var ruleTester = new RuleTester()
+ruleTester.run('detect-runinthiscontext-method-in-nodes-vm', rule, {
 
+  valid: [
+    {
+      code: valid
+    }
 
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
+  ],
 
-var ruleTester = new RuleTester();
-ruleTester.run("detect-runinthiscontext-method-in-nodes-vm", rule, {
-
-    valid: [
-
-        // give me some code that won't trigger a warning
-    ],
-
-    invalid: [
-        {
-            code: "",
-            errors: [{
-                message: "Fill me in.",
-                type: "Me too"
-            }]
-        }
-    ]
-});
+  invalid: [
+    {
+      code: invalid,
+      errors: [{
+        message: ERROR_MSG
+      }]
+    }
+  ]
+})
