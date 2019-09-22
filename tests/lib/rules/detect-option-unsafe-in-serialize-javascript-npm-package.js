@@ -2,36 +2,29 @@
  * @fileoverview detect opion:unsafe in serialize method in serialize-javasript npm package
  * @author Gkouziik
  */
-"use strict";
+'use strict'
 
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
+var rule = require('../../../lib/rules/detect-option-unsafe-in-serialize-javascript-npm-package')
+var RuleTester = require('eslint').RuleTester
+const ERROR_MSG = 'detect option:unsafe in serialize'
+const valid = 'serialize({str: "string",  obj  : {foo: "foo"},arr  : [1, 2, 3],bool : true})'
+const invalid = 'serialize(object,{unsafe:true})'
 
-var rule = require("../../../lib/rules/detect-option-unsafe-in-serialize-javascript-npm-package"),
+var ruleTester = new RuleTester()
+ruleTester.run('detect-option-unsafe-in-serialize-javascript-npm-package', rule, {
 
-    RuleTester = require("eslint").RuleTester;
+  valid: [{
 
+    code: valid
+  }
+  ],
 
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
-
-var ruleTester = new RuleTester();
-ruleTester.run("detect-option-unsafe-in-serialize-javascript-npm-package", rule, {
-
-    valid: [
-
-        // give me some code that won't trigger a warning
-    ],
-
-    invalid: [
-        {
-            code: "",
-            errors: [{
-                message: "Fill me in.",
-                type: "Me too"
-            }]
-        }
-    ]
-});
+  invalid: [
+    {
+      code: invalid,
+      errors: [{
+        message: ERROR_MSG
+      }]
+    }
+  ]
+})
