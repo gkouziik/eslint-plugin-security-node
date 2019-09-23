@@ -2,36 +2,29 @@
  * @fileoverview detect option mulitpleStatements:true in createConnection method of mysql
  * @author Gkouziik
  */
-"use strict";
+'use strict'
 
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
+var rule = require('../../../lib/rules/detect-option-multiplestatements-in-mysql')
+var RuleTester = require('eslint').RuleTester
+const ERROR_MSG = 'detect option multipleStatements:true'
+const valid = 'var mysql = require("mysql"); var connection = mysql.createConnection({host: "localhost",user: "db_user",password: "secret",database: "node_app_db"});'
+const invalid = 'var mysql = require("mysql"); var connection = mysql.createConnection({host: "localhost", multipleStatements: true})'
 
-var rule = require("../../../lib/rules/detect-option-multiplestatements-in-mysql"),
+var ruleTester = new RuleTester()
+ruleTester.run('detect-option-multiplestatements-in-mysql', rule, {
 
-    RuleTester = require("eslint").RuleTester;
+  valid: [
+    {
+      code: valid
+    }
+  ],
 
-
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
-
-var ruleTester = new RuleTester();
-ruleTester.run("detect-option-multiplestatements-in-mysql", rule, {
-
-    valid: [
-
-        // give me some code that won't trigger a warning
-    ],
-
-    invalid: [
-        {
-            code: "",
-            errors: [{
-                message: "Fill me in.",
-                type: "Me too"
-            }]
-        }
-    ]
-});
+  invalid: [
+    {
+      code: invalid,
+      errors: [{
+        message: ERROR_MSG
+      }]
+    }
+  ]
+})
