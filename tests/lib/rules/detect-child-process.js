@@ -17,8 +17,8 @@ const RuleTester = require('eslint').RuleTester
 // Tests
 // ------------------------------------------------------------------------------
 
-const ERROR_MSG_EXEC = 'Found child_process.exec() with non Literal first argument'
-const ERROR_MSG_EXECFILE_SPAWN = 'Found child_process.execFile or child_process.spawn() with option shell:true'
+const ERROR_MSG_EXEC = 'detect exec of child_process with non Literal argument'
+const ERROR_MSG_EXECFILE_SPAWN = 'detect option shell:true in execFile or spawn of child_process'
 var ruleTester = new RuleTester()
 var validExec = 'child_process.exec("ls", function (err, data) {})'
 var invalidExec = 'var path = "user input"; child_process.exec("ls -l" + path, function (err, data) {})'
