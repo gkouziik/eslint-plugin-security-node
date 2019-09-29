@@ -10,7 +10,7 @@
     "security"
   ],
   "author": "gkouziik",
-  "main": "lib/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha tests --recursive"
   },
