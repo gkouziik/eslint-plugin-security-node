@@ -12,7 +12,7 @@
   "author": "gkouziik",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha test/**/*",
+    "test": "mocha tests --recursive",
     "lint": "./node_modules/.bin/eslint ."
   },
   "dependencies": {},
