@@ -7,7 +7,9 @@ This plugin will help to identify potential threads,and prevent attacks
 
 ## Installation
 
+```sh
 npm install --save-dev eslint-plugin-security-node
+```
 
 ## Usage
 
@@ -26,7 +28,7 @@ Add the following configuration to your ```.eslintrc``` file:
 ## Developer guide
 
 * Use [GitHub pull requests](https://help.github.com/en/articles/about-pull-requests)
-* Check the .eslintrc file to see the ESLint setuo
+* Check the .eslintrc file to see the ESLint setup
 
 ## Tests
 
