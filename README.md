@@ -1,4 +1,4 @@
-# eslint-plugin-security-plugin
+# eslint-plugin-security-node
 
 ESLint plugin for security <br/>
 ESLint rules for Node Security <br/>
