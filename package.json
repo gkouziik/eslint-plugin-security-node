@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-security-node",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Create a security plugin for node.js",
   "keywords": [
     "eslint",
