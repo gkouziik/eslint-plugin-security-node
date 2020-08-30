@@ -2,7 +2,8 @@
 ### The $where operator attack
 The **$where** operator has a vary dangerous feature: it allows you to pass a string that will be evaluated inside your server.
 
-To reproduce the problem, suppose that you have an online store and wnt to find out which users have more than X canceled orders.You could query as the following:
+To reproduce the problem, suppose that you have an online store and wnt to find out which users have more than X canceled orders.
+You could query as the following:
 ```javascript
 var query = {
     $where: "this.canceledOrders > " + req.body.canceled
@@ -12,7 +13,8 @@ db.collection('users').find(query).each(function(err, doc){
 })
 ```
 
-In this case,mongo-sanitize will not help you if the input string **'0; return true'**. Your $where clause will be evaluated aas **this.canceledOrders > 0; return true** and all users would be returned.
+In this case,mongo-sanitize will not help you if the input string **'0; return true'**.
+Your $where clause will be evaluated aas **this.canceledOrders > 0; return true** and all users would be returned.
 
 Or you could receive **'0; while(true){}'** as input and suffer a DoS attack.
 
@@ -25,7 +27,8 @@ var query = {
 
 The attack could be the string **'\'; return \'\' == \''** and the where clause would be evaluated to **this.name === ''; return '' == ''**,that results in returning all users instead of only those who matches the clause.
 
-The solution here is to never use the $where operator.Why? I list it here:
+The solution here is to never use the $where operator.
+Why? I list it here:
 
 * Performance: since you can run arbitary Javscript code, the $where operator is not optimized. That means: indexes will be ignored.
 
@@ -39,7 +42,8 @@ var query = {
 }
 ```
 
-However, it won't work. The local variable value is not passed to Mongo and it returns following error if executed in shell
+However, it won't work.
+The local variable value is not passed to Mongo and it returns following error if executed in shell
 
 ```javascript
 Error: error: {

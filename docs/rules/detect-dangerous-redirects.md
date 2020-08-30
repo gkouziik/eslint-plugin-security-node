@@ -1,13 +1,16 @@
 # detect dangerous redirects
 
 ### What are Unsafe Redirects?
-Unsafe or unvalidated redirects are important security considerations for any web developer!Express provides native support for redirects,making them easy to implement and use.However,Express leves the work of perfoming input validation to the developer.
+Unsafe or unvalidated redirects are important security considerations for any web developer!
+Express provides native support for redirects,making them easy to implement and use.
+However,Express leves the work of perfoming input validation to the developer.
 
 Here's the definition according to OWASP.org's "Unvalidated Redirects and Forwards" cheat sheet:
 
 * Unvalidated redirects and forwards are possible when a web application accepts untrusted input that could cause the web application to redirect the request to a URL contained within untrusted input.
 
-Redirects are commonly used in login and authentication processes,so users can be redirected back to the page they were on before logging in.Other scenarios exist,but vary based on business need or application type.
+Redirects are commonly used in login and authentication processes,so users can be redirected back to the page they were on before logging in.
+Other scenarios exist,but vary based on business need or application type.
 
 ### Why are they bad?
 Redirects that do not validate user input can enable attackers to launch phising scams,steal user credentials,and perform other malicious actions.
@@ -23,7 +26,8 @@ However, if the server-side redirect logic does not validate data entering the u
 This is just one example of how attackers can take advantage of unsafe redirect logic.
 
 ### An Example of an Unsafe Redirect
-In the following code, you'll see that /login accepts unvalidated data from the url parameter and passes it directly into the Express res.redirect() method. As a result, Express will redirect the user to whatever URL is entered or supplied so long as the user is authenticated.
+In the following code, you'll see that /login accepts unvalidated data from the url parameter and passes it directly into the Express res.redirect() method.
+As a result, Express will redirect the user to whatever URL is entered or supplied so long as the user is authenticated.
 
 ```javascript
 var express = require('express');

@@ -3,7 +3,8 @@
 ### How a Regural Expression can bring your Node.js service down
 The use of Regural Expressions (RegEx) is quite common among software engineers and DevOps ot IT roles where they specify a string pattern to match a specific string in a text.
 
-Often, programmers will use RegEx to validate that an input received from a user conforms to an expected condition.For example:
+Often, programmers will use RegEx to validate that an input received from a user conforms to an expected condition.
+For example:
 
 Testing that a user's provided e-mail address is valid:
 

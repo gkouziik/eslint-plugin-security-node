@@ -11,19 +11,25 @@ If the server is misconfigured to leak internal implementation details via cooki
 ### What about express-session?
 
 #### What is Express session used for?
-You can **use sessions** to comunicate data to middleware that's executed later,or ro retrieve it later on, on subsequent requests. Where is the session data stored? It depends on how you set up the express-session module. All solutions store the session id in a cookie, and keep the data server-side.
+You can **use sessions** to comunicate data to middleware that's executed later,or ro retrieve it later on, on subsequent requests.
+Where is the session data stored? It depends on how you set up the express-session module.
+All solutions store the session id in a cookie, and keep the data server-side.
 
 #### How does express session work?
-Until the cookie expires, every time you make a request, your browser will send the cookies back to the server. A module like express-session will provide you with a nice API to work with sessions (letting you get & set data to the session), but under the hood, it will save and retrieve this data using a cookie.
+Until the cookie expires, every time you make a request, your browser will send the cookies back to the server.
+A module like express-session will provide you with a nice API to work with sessions (letting you get & set data to the session), but under the hood, it will save and retrieve this data using a cookie.
 
 #### "Security" options of express-session
-* **cookie.httpOnly**: Specifies the **boolean** value for the **HttpOnly Set-Cookie** attribute.When truthy,the HttpOnly attribute is set,otherwise it is not. **By default**, the HttpOnly attribute **is set**.
+* **cookie.httpOnly**: Specifies the **boolean** value for the **HttpOnly Set-Cookie** attribute.
+When truthy,the HttpOnly attribute is set,otherwise it is not.
+**By default**, the HttpOnly attribute **is set**.
 
 **Note**: Be careful when setting to true,as compliant clients will not allow client-side Javascript to see the cookie in document.cookie!
 
 So if this attribute is set, it actually prevents cookies from being accessed by browser JS scripts.
 
-* **cookie.secure**: Specifies the **boolean** value for the **Secure Set-Cookie** attribute.When truthy ,the Secure attribute is set,otherwise it is not.**By default**,the Secure attribute is **not** set.
+* **cookie.secure**: Specifies the **boolean** value for the **Secure Set-Cookie** attribute.
+When truthy ,the Secure attribute is set,otherwise it is not.**By default**,the Secure attribute is **not** set.
 
 **Note**: Be careful when setting this to true,as compliant clients will not send the cookie back to the server in the future if the browser does not have an **HTTPS** connection.
 

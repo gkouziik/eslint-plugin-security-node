@@ -3,7 +3,8 @@
 Serialize-javascript is a famous npm package that serialize javascript to a superset of JSON that includes regural expressions,dates and functions.
 
 ### Automatic Escaping of HTML Characters
-A primary feature of this package is to serialize code to a string of literal JavaScript which can be embedded in an HTML document by adding it as the contents of the script element. In order to make this safe, HTML characters and JavaScript line terminators are escaped automatically.
+A primary feature of this package is to serialize code to a string of literal JavaScript which can be embedded in an HTML document by adding it as the contents of the script element.
+In order to make this safe, HTML characters and JavaScript line terminators are escaped automatically.
 ```javascript
 serialize({
     haxorXSS: '</script>'
@@ -17,10 +18,13 @@ The above will produce the following string,HTML-escaped output which is safe to
 You can pass an optional unsafe argument to serialize() for straight serialization.
 
 ### Options
-The serialize() function accepts an options object as its second argument.All options are being defaulted to undefined.
+The serialize() function accepts an options object as its second argument.
+All options are being defaulted to undefined.
 
 ### What about options.unsafe?
-This option is to signal serialize() that we want to do a straight conversion, without the XSS protection. This options needs to be explicitly set to true. HTML characters and JavaScript line terminators will not be escaped. You will have to roll your own.
+This option is to signal serialize() that we want to do a straight conversion, without the XSS protection.
+This options needs to be explicitly set to true. HTML characters and JavaScript line terminators will not be escaped.
+You will have to roll your own.
 
 ```js
 serialize(obj,{unsafe:true});
@@ -28,7 +32,8 @@ serialize(obj,{unsafe:true});
 
 ### How does this HTML Injection Attack work in practice?
 
-Let's say we have a node.js webapp. We’re running express.js and using ejs for our templating language.
+Let's say we have a node.js webapp.
+We’re running express.js and using ejs for our templating language.
 We’re fetching the name url param and injecting it into the ejs template.
 
 ```js
@@ -66,10 +71,14 @@ Here’s how an attacker could use this to get access to your bank account.
 ```js
  https://yourBankWebsite.com/account?id=<script>[maliciousCodeHere]</script>
 ```
-When you login, your bank’s website server starts a session for you (usually lasting 10–15 minutes, after which you are automatically logged out). The session information (usually called a token) is stored in a cookie on your computer.
+When you login, your bank’s website server starts a session for you (usually lasting 10–15 minutes, after which you are automatically logged out).
+The session information (usually called a token) is stored in a cookie on your computer.
 If the hacker can get you to login, and then click the link he sent you, then maliciousCodeHere will run, and could send your session token to the hacker.
-This allows him to steal your session. He could then (in theory) create a cookie on his computer and store your session information in it. If that session is still active, he can visit your banks website, and he’ll be logged in as you, and can browse around, look at bank account information, and possibly even initiate a transfer or change your password.
-In summary, the hacker sent you a link, which caused you to run JavaScript in your browser, after you logged in, allowing him to steal protected information (in this case, the session token). This is dangerous because you are running unsafe JS after you’ve been given access to your sensitive info.
+This allows him to steal your session.
+He could then (in theory) create a cookie on his computer and store your session information in it.
+If that session is still active, he can visit your banks website, and he’ll be logged in as you, and can browse around, look at bank account information, and possibly even initiate a transfer or change your password.
+In summary, the hacker sent you a link, which caused you to run JavaScript in your browser, after you logged in, allowing him to steal protected information (in this case, the session token).
+This is dangerous because you are running unsafe JS after you’ve been given access to your sensitive info.
 
 
 

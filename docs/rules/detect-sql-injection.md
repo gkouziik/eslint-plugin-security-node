@@ -4,7 +4,8 @@
 With a successful database injection,an attacker can execute malicious commands on a database to steal sensitive data,tamper with stored data,execute database administration operations,access contents of files present on the database filesystem,and,in some cases,issue commands to the host operating system.
 
 ### SQL Injection Attack Mechanics
-Dynamic database queries that include user-supplied inputs are the primary target behind the SQL injection attack. When malicious data is concatenated to a SQL query,the SQL interpreter fails to distinguish between the intended command and input data, resulting in the execution of the malicious data as SQL commands.
+Dynamic database queries that include user-supplied inputs are the primary target behind the SQL injection attack.
+When malicious data is concatenated to a SQL query,the SQL interpreter fails to distinguish between the intended command and input data, resulting in the execution of the malicious data as SQL commands.
 
 Let's consider a vulnerable SQL query,as shownin in Example,that aauthenticates a user.
 
@@ -17,7 +18,8 @@ connection.query(
     });
 ```
 
-The above example illustrates code that dynamically constructs a SQL query by appending the user-supplied request parameter username.To exploit this query,an attacker can enter admin' -- as a username, which ultimately results in executing the SQL query,as shown in the following Example
+The above example illustrates code that dynamically constructs a SQL query by appending the user-supplied request parameter username.
+To exploit this query,an attacker can enter admin' -- as a username, which ultimately results in executing the SQL query,as shown in the following Example
 
 ```javascript
 SELECT * FROM accounts WHERE username = 'admin'
@@ -47,7 +49,8 @@ An attacker can use a wide variety of malicious inputs for concluding injection,
 The good news is that SQL injection is easy to prevent by using a few simple measures.
 
 ### Use Pramaterized Queries To Bind All User-Supplied Data
-A parameterized query is considered a silver bullet for preventing the dreaded SQL injection.Parameterized querires prevent an attacker from changing the intent of a query,and enable the SQL interpreter to distinguish clearly between code and data.Hence,as shown in the following example,alwasys bind all user inputs to the query with parameters.
+A parameterized query is considered a silver bullet for preventing the dreaded SQL injection.Parameterized querires prevent an attacker from changing the intent of a query,and enable the SQL interpreter to distinguish clearly between code and data.
+Hence,as shown in the following example,alwasys bind all user inputs to the query with parameters.
 
 Example:
 ```javascript
