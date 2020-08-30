@@ -1,7 +1,7 @@
 # detect vm.runInThisContext() method in nodes vm (detect-runinthiscontext-method-in-nodes-vm)
 
 ### Dive into VM's world
-With node.js VM you can run JS code in a new "node process" that has no accesss to the standard node library -no **process**, no **console**, just basic plain JS: that's what the vm module lets you do.
+With node.js VM you can run JS code in a new "node process" that has no access to the standard node library - no **process**, no **console**, just basic plain JS: that's what the vm module lets you do.
 
 Let's take a look at the following example:
 
@@ -11,7 +11,7 @@ let result = vm.runInNewContext('a + 1', {a: 2});
 console.log(result); // 3
 ```
 
-Here we are asking Node to create a new V8 context and run a bunch of code (a + 1) there for us,passing an object that constitutes the global environment of that new context ({a: 2}).
+Here we are asking Node to create a new V8 context and run a bunch of code (a + 1) there for us, passing an object that constitutes the global environment of that new context ({a: 2}).
 
 Note that the current execution context is not affected by what happens in that new context:
 

@@ -1,16 +1,23 @@
 # detect insecure randomness via Math.random() (detect-insecure-randomness)
 ### Insecure Randomness
-The **Math.random()** function returns a floating-point, pseudo-random number in the range 0–1 (inclusive of 0, but not 1) with approximately uniform distribution over that range — which you can then scale to your desired range. The implementation selects the initial seed to the random number generation algorithm; it cannot be chosen or reset by the user.
+The **Math.random()** function returns a floating-point, pseudo-random number in the range 0–1 (inclusive of 0, but not 1) with approximately uniform distribution over that range — which you can then scale to your desired range.
+The implementation selects the initial seed to the random number generation algorithm; it cannot be chosen or reset by the user.
 
-The **Math.random()** is often used to generate nonpredictable values such as random tokens,resource IDs, or UUIDs.However, Math.random() is cryptographically insecure.It can produce predictable values and is therefore not safe to use in security-sensitive context.
+The **Math.random()** is often used to generate nonpredictable values such as random tokens, resource IDs, or UUIDs.
+However, Math.random() is cryptographically insecure.
+It can produce predictable values and is therefore not safe to use in a security-sensitive context.
 
 ### How To Prevent It?
-Math.random() does not provide cryptographically secure random numbers. Do not use them for anything related to security. Use the Web Crypto API instead, and more precisely the window.crypto.getRandomValues() method.
+Math.random() does not provide cryptographically secure random numbers.
+Do not use them for anything related to security. Use the Web Crypto API instead, and more precisely the window.crypto.getRandomValues() method.
 
 ### Crypto.getRandomValues()
-The Crypto.getRandomValues() method lets you get cryptographically strong random values. The array given as the parameter is filled with random numbers (random in its cryptographic meaning).
+The Crypto.getRandomValues() method lets you get cryptographically strong random values.
+The array given as the parameter is filled with random numbers (random in its cryptographic meaning).
 
-To guarantee enough performance, implementations are not using a truly random number generator, but they are using a pseudo-random number generator seeded with a value with enough entropy. The PRNG used differs from one implementation to the other but is suitable for cryptographic usages. Implementations are also required to use a seed with enough entropy, like a system-level entropy source.
+To guarantee enough performance, implementations are not using a truly random number generator, but they are using a pseudo-random number generator seeded with a value with enough entropy.
+The PRNG used differs from one implementation to the other but is suitable for cryptographic usages.
+Implementations are also required to use a seed with enough entropy, like a system-level entropy source.
 
 ### Syntax
 ```javascript

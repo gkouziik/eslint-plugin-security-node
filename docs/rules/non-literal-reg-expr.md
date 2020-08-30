@@ -1,9 +1,10 @@
-# Non literal regural expressions may cause possible attack (non-literal-reg-expr)
+# Non-literal regular expressions may cause possible attack (non-literal-reg-expr)
 
-### How a Regural Expression can bring your Node.js service down
-The use of Regural Expressions (RegEx) is quite common among software engineers and DevOps ot IT roles where they specify a string pattern to match a specific string in a text.
+### How a Regular Expression can bring your Node.js service down
+The use of Regular Expressions (RegEx) is quite common among software engineers and DevOps IT roles where they specify a string pattern to match a specific string in a text.
 
-Often, programmers will use RegEx to validate that an input received from a user conforms to an expected condition.For example:
+Often, programmers will use RegEx to validate that an input received from a user conforms to an expected condition.
+For example:
 
 Testing that a user's provided e-mail address is valid:
 
@@ -19,7 +20,7 @@ Such an attack will render a Node.js or JavaScript application unresponsive, and
 
 ## Rule Details
 
-This rule aims to detect non literal RegExp that may contains user's input!
+This rule aims to detect non-literal RegExp that may contains user's input!
 
 Examples of **incorrect** code for this rule:
 

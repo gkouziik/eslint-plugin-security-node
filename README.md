@@ -1,8 +1,8 @@
 # eslint-plugin-security-node
 
-ESLint plugin for security <br/>
-ESLint rules for Node Security <br/>
-This plugin will help to identify potential threads,and prevent attacks
+ESLint plugin containing Node.js security rules
+
+This plugin will help to identify potential threats and prevent attacks.
 
 
 ## Installation
