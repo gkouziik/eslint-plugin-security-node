@@ -2,18 +2,18 @@
 
 ### What are Unsafe Redirects?
 Unsafe or unvalidated redirects are important security considerations for any web developer!
-Express provides native support for redirects,making them easy to implement and use.
-However,Express leves the work of perfoming input validation to the developer.
+Express provides native support for redirects, making them easy to implement and use.
+However, Express leaves the task of performing input validation to the developer.
 
 Here's the definition according to OWASP.org's "Unvalidated Redirects and Forwards" cheat sheet:
 
 * Unvalidated redirects and forwards are possible when a web application accepts untrusted input that could cause the web application to redirect the request to a URL contained within untrusted input.
 
-Redirects are commonly used in login and authentication processes,so users can be redirected back to the page they were on before logging in.
-Other scenarios exist,but vary based on business need or application type.
+Redirects are commonly used in login and authentication processes, so users can be redirected back to the page they were on before logging in.
+Other scenarios exist but vary based on business need or application type.
 
 ### Why are they bad?
-Redirects that do not validate user input can enable attackers to launch phising scams,steal user credentials,and perform other malicious actions.
+Redirects that do not validate user input can enable attackers to launch phishing scams, steal user credentials, and perform other malicious actions.
 
 If an attacker discovers that you are not validating external, user-supplied input, they may exploit this vulnerability by posting specially-crafted links on forums, social media, and other public places to get users to click it.
 
@@ -62,7 +62,7 @@ app.listen(port, function() {
 * If used, don’t involve user parameters in calculating the destination. This can usually be done.
 
 * If destination parameters can’t be avoided, ensure that the supplied value is valid, and authorized for the user. 
-It is recommended that any such destination parameters be a mapping value, rather than the actual URL or portion of the URL, and that server side code translate this mapping to the target URL.
+It is recommended that any such destination parameters be a mapping value, rather than the actual URL or portion of the URL and that server-side code translates this mapping to the target URL.
 
 
 ## Further Reading

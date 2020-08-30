@@ -2,7 +2,7 @@
 ### The $where operator attack
 The **$where** operator has a vary dangerous feature: it allows you to pass a string that will be evaluated inside your server.
 
-To reproduce the problem, suppose that you have an online store and wnt to find out which users have more than X canceled orders.
+To reproduce the problem, suppose that you have an online store and want to find out which users have more than X canceled orders.
 You could query as the following:
 ```javascript
 var query = {
@@ -30,7 +30,7 @@ The attack could be the string **'\'; return \'\' == \''** and the where clause 
 The solution here is to never use the $where operator.
 Why? I list it here:
 
-* Performance: since you can run arbitary Javscript code, the $where operator is not optimized. That means: indexes will be ignored.
+* Performance: since you can run arbitrary JavaScript code, the $where operator is not optimized. That means: indexes will be ignored.
 
 * Scope is not accessible: the solution to avoid the code injection would be to add the where clause inside a function, like the following:
 
@@ -43,7 +43,7 @@ var query = {
 ```
 
 However, it won't work.
-The local variable value is not passed to Mongo and it returns following error if executed in shell
+The local variable value is not passed to Mongo and it returns the following error if executed in a shell
 
 ```javascript
 Error: error: {
@@ -52,7 +52,7 @@ Error: error: {
 }
 ```
 
-* There is always a better solution. In this case , you would use te operators **$eq** or **$gt**.
+* There is always a better solution. In this case, you would use te operators **$eq** or **$gt**.
 
 
 ## Rule Details

@@ -21,14 +21,14 @@ console.log(buf);
 // Prints (contents may vary) CHECK WHAT BUFFER CONTAINTS ->
 // <Buffer a0 8b 28 3f 01 00 00 00 50 32>
 ```
-### The question is,where's the problem?
+### The question is, where's the problem?
 We need to see the whole story here!
 Why is buffer class exists in NodeJS API?
-Client-side Javscript spares us the need to deal with memory allocation.
-Like many of its peer languages,in JS the underlying engine (e.g V8) allocates memory and garbage-collect it as needed,making coding simpler and safer.
-In the browser,preventing access to memory is also necessary to maintain the sandbox JS runs in.
-When JS expanded to the server with Node,the browser sandbox was removed,and the need for easy and fast binary data processing increased.
-To address these needs,Node introduced the Buffer class,which deals with binary data.
+Client-side JavaScript spares us the need to deal with memory allocation.
+Like many of its peer languages, in JS the underlying engine (e.g V8) allocates memory and garbage-collect it as needed, making coding simpler and safer.
+In the browser, preventing access to memory is also necessary to maintain the sandbox JS runs in.
+When JS expanded to the server with Node, the browser sandbox was removed, and the need for easy and fast binary data processing increased.
+To address these needs, Node introduced the Buffer class, which deals with binary data.
 Client-side JavaScript spares us the need to deal with memory allocation.
 Like many of its peer languages, in JS the underlying engine (e.g. V8) allocates memory and garbage-collects it as needed, making coding simpler and safer.
 In the browser, preventing access to memory is also necessary to maintain the sandbox JS runs in.
@@ -63,10 +63,10 @@ When calling Buffer.allocUnsafe(), the segment of allocated memory is uninitiali
 While this design makes the allocation of memory quite fast, the allocated segment of memory might contain old data that is potentially sensitive.
 Using a Buffer created by Buffer.allocUnsafe() without completely overwriting the memory can allow this old data to be leaked when the Buffer memory is read
 
-### Where's the problem if i can always use Buffer.alloc() instead of Buffer.allocUnsafe() ?
+### Where's the problem if I can always use Buffer.alloc() instead of Buffer.allocUnsafe() ?
 Allocation is a synchronous operation and we know that single threaded Node.js doesn't really feel good about synchronous stuff.
-Unsafe allocation is much faster than safe, because the buffer santarization step takes time.
-Safe allocation is, well, safe, but there is a performance trade off.
+Unsafe allocation is much faster than safe because the buffer sanitization step takes time.
+Safe allocation is, well, safe, but there is a performance trade-off.
 
 
 ## Further Reading

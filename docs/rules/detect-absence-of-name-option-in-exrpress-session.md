@@ -16,5 +16,5 @@ resave: false,
 saveUninitialized: true
 }));
 ```
-With this configuration option, we can stop declaring to the world our session-handling mechanism and force the attacker to spend more time using various different attacks that don’t impact our setup.
+With this configuration option, we can stop declaring to the world our session-handling mechanism and force the attacker to spend more time using different attacks that don’t impact our setup.
 

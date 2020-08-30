@@ -3,8 +3,9 @@
 The **Math.random()** function returns a floating-point, pseudo-random number in the range 0–1 (inclusive of 0, but not 1) with approximately uniform distribution over that range — which you can then scale to your desired range.
 The implementation selects the initial seed to the random number generation algorithm; it cannot be chosen or reset by the user.
 
-The **Math.random()** is often used to generate nonpredictable values such as random tokens,resource IDs, or UUIDs.
-However, Math.random() is cryptographically insecure.It can produce predictable values and is therefore not safe to use in security-sensitive context.
+The **Math.random()** is often used to generate nonpredictable values such as random tokens, resource IDs, or UUIDs.
+However, Math.random() is cryptographically insecure.
+It can produce predictable values and is therefore not safe to use in a security-sensitive context.
 
 ### How To Prevent It?
 Math.random() does not provide cryptographically secure random numbers.

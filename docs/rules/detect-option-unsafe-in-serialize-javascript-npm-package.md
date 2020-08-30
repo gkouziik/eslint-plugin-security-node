@@ -1,6 +1,6 @@
 # detect opion:unsafe in serialize method in serialize-javasript npm package (detect-option-unsafe-in-serialize-javascript-npm-package)
 
-Serialize-javascript is a famous npm package that serialize javascript to a superset of JSON that includes regural expressions,dates and functions.
+Serialize-javascript is a famous npm package that serializes javascript to a superset of JSON that includes regular expressions, dates and functions.
 
 ### Automatic Escaping of HTML Characters
 A primary feature of this package is to serialize code to a string of literal JavaScript which can be embedded in an HTML document by adding it as the contents of the script element.
@@ -22,8 +22,9 @@ The serialize() function accepts an options object as its second argument.
 All options are being defaulted to undefined.
 
 ### What about options.unsafe?
-This option is to signal serialize() that we want to do a straight conversion, without the XSS protection.
-This options needs to be explicitly set to true. HTML characters and JavaScript line terminators will not be escaped.
+This option is used to signal serialize() that we want to do a straight conversion, without the XSS protection.
+This options needs to be explicitly set to true.
+HTML characters and JavaScript line terminators will not be escaped.
 You will have to roll your own.
 
 ```js
@@ -32,7 +33,7 @@ serialize(obj,{unsafe:true});
 
 ### How does this HTML Injection Attack work in practice?
 
-Let's say we have a node.js webapp.
+Let's say we have a node.js web app.
 We’re running express.js and using ejs for our templating language.
 We’re fetching the name url param and injecting it into the ejs template.
 
@@ -58,10 +59,11 @@ So far so good. Nothing fishy going on here. Now let’s try to insert a <script
 ```js
 localhost:3000/?name=<script>alert('I am the hacker!!!!')</script>
 ```
-This is bad because we are allowing a (untrusted) user to execute any JavaScript they want on our page.
+This is bad because we are allowing an (untrusted) user to execute any JavaScript they want on our page.
 
-### How can this atack hurt me?
-An alert box on a page is pretty harmless. So how could this actually hurt somebody?
+### How can this attack hurt me?
+An alert box on a page is pretty harmless.
+So how could this hurt somebody?
 
 Here’s how an attacker could use this to get access to your bank account.
 
@@ -71,12 +73,12 @@ Here’s how an attacker could use this to get access to your bank account.
 ```js
  https://yourBankWebsite.com/account?id=<script>[maliciousCodeHere]</script>
 ```
-When you login, your bank’s website server starts a session for you (usually lasting 10–15 minutes, after which you are automatically logged out).
+When you log in, your bank’s website server starts a session for you (usually lasting 10–15 minutes, after which you are automatically logged out).
 The session information (usually called a token) is stored in a cookie on your computer.
-If the hacker can get you to login, and then click the link he sent you, then maliciousCodeHere will run, and could send your session token to the hacker.
+If the hacker can get you to log in, and then click the link he sent you, then maliciousCodeHere will run and could send your session token to the hacker.
 This allows him to steal your session.
 He could then (in theory) create a cookie on his computer and store your session information in it.
-If that session is still active, he can visit your banks website, and he’ll be logged in as you, and can browse around, look at bank account information, and possibly even initiate a transfer or change your password.
+If that session is still active, he can visit your bank's website, and he’ll be logged in as you, and can browse around, look at bank account information, and possibly even initiate a transfer or change your password.
 In summary, the hacker sent you a link, which caused you to run JavaScript in your browser, after you logged in, allowing him to steal protected information (in this case, the session token).
 This is dangerous because you are running unsafe JS after you’ve been given access to your sensitive info.
 
