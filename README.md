@@ -73,10 +73,6 @@ For more information check the documentation file [detect-dangerous-redirects](h
 
 For more information check the documentation file [detect-eval-with-expr](https://github.com/gkouziik/eslint-plugin-security-node/blob/master/docs/rules/detect-eval-with-expr.md)
 
-### `detect-helmet-without-nocache`
-
-For more information check the documentation file [detect-helmet-without-nocache](https://github.com/gkouziik/eslint-plugin-security-node/blob/master/docs/rules/detect-helmet-without-nocache.md)
-
 ### `detect-html-injection`
 
 For more information check the documentation file [detect-html-injection](https://github.com/gkouziik/eslint-plugin-security-node/blob/master/docs/rules/detect-html-injection.md)
