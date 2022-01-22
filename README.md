@@ -85,11 +85,11 @@ For more information check the documentation file [detect-insecure-randomness](h
 
 For more information check the documentation file [detect-non-literal-require-calls](https://github.com/gkouziik/eslint-plugin-security-node/blob/master/docs/rules/detect-non-literal-require-calls.md)
 
-### `detect-nosql-injection.md`
+### `detect-nosql-injection`
 
 For more information check the documentation file [detect-nosql-injection](https://github.com/gkouziik/eslint-plugin-security-node/blob/master/docs/rules/detect-nosql-injection.md)
 
-### `detect-option-multiplestatements-in-mysql'`
+### `detect-option-multiplestatements-in-mysql`
 
 For more information check the documentation file [detect-option-multiplestatements-in-mysql](https://github.com/gkouziik/eslint-plugin-security-node/blob/master/docs/rules/detect-option-multiplestatements-in-mysql.md)
 
