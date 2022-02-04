@@ -121,6 +121,15 @@ For more information check the documentation file [detect-sql-injection](https:/
 
 For more information check the documentation file [disable-ssl-across-node-server](https://github.com/gkouziik/eslint-plugin-security-node/blob/master/docs/rules/disable-ssl-across-node-server.md)
 
+### `detect-improper-exception-handling`
 
+For more information check the documentation file [detect-improper-exception-handling](https://github.com/gkouziik/eslint-plugin-security-node/blob/master/docs/rules/detect-improper-exception-handling.md)
 
+### `detect-unhandled-async-errors`
+
+For more information check the documentation file [detect-unhandled-async-errors](https://github.com/gkouziik/eslint-plugin-security-node/blob/master/docs/rules/detect-unhandled-async-errors.md)
+
+### `detect-unhandled-event-errors`
+
+For more information check the documentation file [detect-unhandled-event-errors](https://github.com/gkouziik/eslint-plugin-security-node/blob/master/docs/rules/detect-unhandled-event-errors.md)
 
