@@ -87,6 +87,10 @@ So what you can do?
 
 That's exactly what this rule does! It checks for dynamic queries using string concatenation!
 
+### Options
+
+* objectNames: Contains a list of strings matching the variable names of your connection string. Default: ['connection', 'connect', 'conn']
+* methodNames: Contains a list of strings matching the method names that can be used to query. Default: ['query']
 
 ## Further Reading
 [link 1](http://nodegoat.herokuapp.com/tutorial/a1)
