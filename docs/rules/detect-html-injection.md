@@ -24,11 +24,11 @@ document.wirte("Welcome " +
 document.URL.substring(name, document.URL.length)); <- SINK
 </script>
 ```
-**Source**: document.URL
+**Source**: `document.URL`
 
-**Sink**: document.write()
+**Sink**: `document.write()`
 
-**Result**: document.write("<script>alert(docuemnt.cookie)</script>");
+**Result**: `document.write("<script>alert(docuemnt.cookie)</script>");`
 
 The exploit will take place when visiting the following URL:
 
@@ -43,12 +43,11 @@ Sinks: Sinks are all the DOM Properties, JavaScript functions, and other Client-
 
 Function Name | Browser | Example
 ------------- | ------- | -------
-document.write | All | document.write(“<b>” + userControlledVal + “</b>”);
-document.writeln | All | document.writeln("<b>" + userControlledVal + "</b>");
-anyElement.innerHTML | All | divElem.innerHTML = “Hello ” + userControlledVal
-anyElement.outerHTML | All | divElem.outerHTML =  "<div>Hello " + userControlledVal
-+ "</div>"
-anyElement.insertAdjacentHTML | All | divElem.insertAdjacentHTML("","<b>"+ userControlledVal + "</b>");)
+`document.write` | All | `document.write(“<b>” + userControlledVal + “</b>”);`
+`document.writeln` | All | `document.writeln("<b>" + userControlledVal + "</b>");`
+`anyElement.innerHTML` | All | `divElem.innerHTML = “Hello ” + userControlledVal`
+`anyElement.outerHTML` | All | `divElem.outerHTML =  "<div>Hello " + userControlledVal + "</div>"`
+`anyElement.insertAdjacentHTML` | All | `divElem.insertAdjacentHTML("","<b>"+ userControlledVal + "</b>");)`
 
 ### Difference between document.write functions and properties like innerHTML
 The document.write method: 
@@ -115,9 +114,9 @@ var pos = document.URL.indexOf("foo=") + 4;
 document.write(document.URL.substring(pos, document.URL.length));
 </script>
 ```
-* Source: document.URL
-* Sink: document.write()
-* Result: document.write(“<script>alert(document.cookie)</script>”); 
+* Source: `document.URL`
+* Sink: `document.write()`
+* Result: `document.write(“<script>alert(document.cookie)</script>”);` 
 
 The attack is possible to a Client-side level (this due to the # fragment identifier).
 
