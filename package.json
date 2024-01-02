@@ -24,7 +24,7 @@
   "dependencies": {},
   "devDependencies": {
     "eslint": "^5.16.0",
-    "mocha": "^3.1.2",
+    "mocha": "^10.2.0",
     "release-it": "^17.0.1"
   },
   "engines": {
