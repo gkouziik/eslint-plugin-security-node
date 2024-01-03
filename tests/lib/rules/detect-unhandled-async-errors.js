@@ -19,8 +19,9 @@ const invalidIfWithThrow = "async function run() {const success = await alert('d
 const invalidIfWithThrowTwo = "async function run() {const success = await alert('do something'); if(err) throw new handle('error')}"
 const validCatch = "async function run(out) { await out.catch(error => alert('there is an error'))}"
 const invalidCatch = "async function run(out) { await out }"
+const validCatchError = "async function clientErrorHandler(err, req, res, nextMiddleware) { alert('there is an error') }"
 
-var ruleTester = new RuleTester({ 
+var ruleTester = new RuleTester({
 	parserOptions: { ecmaVersion: 2018 }
 })
 
@@ -75,5 +76,14 @@ ruleTester.run('detect-unhandled-async-errors', rule, {
 				message: ERROR_MSG
 			}]
 		}
+	]
+})
+
+ruleTester.run('detect-unhandled-async-errors', rule, {
+	valid: [
+		{ code: validCatchError }
+	],
+
+	invalid: [
 	]
 })
